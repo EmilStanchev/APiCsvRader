@@ -416,6 +416,19 @@
         "runtime": {
           "bin/placeholder/Data.dll": {}
         }
+      },
+      "Services/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "Data": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Services.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Services.dll": {}
+        }
       }
     }
   },
@@ -1263,11 +1276,17 @@
       "type": "project",
       "path": "../Data/Data.csproj",
       "msbuildProject": "../Data/Data.csproj"
+    },
+    "Services/1.0.0": {
+      "type": "project",
+      "path": "../Services/Services.csproj",
+      "msbuildProject": "../Services/Services.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net7.0": [
-      "Data >= 1.0.0"
+      "Data >= 1.0.0",
+      "Services >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -1299,6 +1318,9 @@
           "projectReferences": {
             "D:\\VTU software engineering\\C#\\API\\CsvReader\\Data\\Data.csproj": {
               "projectPath": "D:\\VTU software engineering\\C#\\API\\CsvReader\\Data\\Data.csproj"
+            },
+            "D:\\VTU software engineering\\C#\\API\\CsvReader\\Services\\Services.csproj": {
+              "projectPath": "D:\\VTU software engineering\\C#\\API\\CsvReader\\Services\\Services.csproj"
             }
           }
         }

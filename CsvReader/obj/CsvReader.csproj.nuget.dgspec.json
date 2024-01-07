@@ -30,6 +30,9 @@
             "projectReferences": {
               "D:\\VTU software engineering\\C#\\API\\CsvReader\\Data\\Data.csproj": {
                 "projectPath": "D:\\VTU software engineering\\C#\\API\\CsvReader\\Data\\Data.csproj"
+              },
+              "D:\\VTU software engineering\\C#\\API\\CsvReader\\Services\\Services.csproj": {
+                "projectPath": "D:\\VTU software engineering\\C#\\API\\CsvReader\\Services\\Services.csproj"
               }
             }
           }
@@ -108,6 +111,65 @@
               "version": "[1.0.118, )"
             }
           },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\VTU software engineering\\C#\\API\\CsvReader\\Services\\Services.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\VTU software engineering\\C#\\API\\CsvReader\\Services\\Services.csproj",
+        "projectName": "Services",
+        "projectPath": "D:\\VTU software engineering\\C#\\API\\CsvReader\\Services\\Services.csproj",
+        "packagesPath": "C:\\Users\\emils\\.nuget\\packages\\",
+        "outputPath": "D:\\VTU software engineering\\C#\\API\\CsvReader\\Services\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\emils\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "D:\\VTU software engineering\\C#\\API\\CsvReader\\Data\\Data.csproj": {
+                "projectPath": "D:\\VTU software engineering\\C#\\API\\CsvReader\\Data\\Data.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
           "imports": [
             "net461",
             "net462",

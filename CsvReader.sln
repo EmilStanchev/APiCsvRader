@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsvReader", "CsvReader\CsvR
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{79D58D05-FF94-450D-B28D-A8077FA502C9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{4DF471D6-C97E-450D-B4D6-408C2564BED9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{79D58D05-FF94-450D-B28D-A8077FA502C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79D58D05-FF94-450D-B28D-A8077FA502C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79D58D05-FF94-450D-B28D-A8077FA502C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DF471D6-C97E-450D-B4D6-408C2564BED9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DF471D6-C97E-450D-B4D6-408C2564BED9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DF471D6-C97E-450D-B4D6-408C2564BED9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DF471D6-C97E-450D-B4D6-408C2564BED9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
