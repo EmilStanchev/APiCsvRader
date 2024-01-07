@@ -34,7 +34,6 @@ namespace Data.Implementation
         public void CreateDb(SQLiteConnection connection, string connectionString)
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
-            connection = new SQLiteConnection(connectionString);
             connection.Open();
 
             using (var command = new SQLiteCommand(connection))

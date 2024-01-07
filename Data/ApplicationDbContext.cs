@@ -1,5 +1,6 @@
 ﻿using Data.Implementation;
 using Data.Interfaces;
+using Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,11 +16,14 @@ namespace Data
 
         private readonly string connectionString;
         private SQLiteConnection connection;
-        private readonly DatabaseService databaseService;
-        public ApplicationDbContext(string databasePath,DatabaseService service)
+        private readonly IDatabaseService databaseService;
+        private readonly IDataInserter _dataInserter;
+        public ApplicationDbContext(string databasePath,IDatabaseService service, IDataInserter dataInserter)
         {
             connectionString = $"Data Source={databasePath};Version=3;";
             databaseService = service;
+            connection = new SQLiteConnection(connectionString);
+            _dataInserter = dataInserter;
         }
         public void Start()
         {
@@ -32,6 +36,10 @@ namespace Data
         public void ExecuteNonQuery(string query)
         {
             databaseService.ExecuteNonQuery(query,connection);
+        }
+        public void InsertCsvDataListWithoutDuplicates(List<CsvData> csvDataList)
+        {
+            _dataInserter.InsertCsvDataListWithoutDuplicates(csvDataList,connection);
         }
         public void Dispose()
         {
