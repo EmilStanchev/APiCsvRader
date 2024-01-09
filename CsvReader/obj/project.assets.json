@@ -6516,11 +6516,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\VTU software engineering\\C#\\API\\CsvReader\\CsvReader\\CsvReader.csproj",
+      "projectUniqueName": "D:\\VTU software engineering\\C#\\API\\CsvUniProject\\APiCsvRader\\CsvReader\\CsvReader.csproj",
       "projectName": "CsvReader",
-      "projectPath": "D:\\VTU software engineering\\C#\\API\\CsvReader\\CsvReader\\CsvReader.csproj",
+      "projectPath": "D:\\VTU software engineering\\C#\\API\\CsvUniProject\\APiCsvRader\\CsvReader\\CsvReader.csproj",
       "packagesPath": "C:\\Users\\emils\\.nuget\\packages\\",
-      "outputPath": "D:\\VTU software engineering\\C#\\API\\CsvReader\\CsvReader\\obj\\",
+      "outputPath": "D:\\VTU software engineering\\C#\\API\\CsvUniProject\\APiCsvRader\\CsvReader\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\emils\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6537,11 +6537,11 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "D:\\VTU software engineering\\C#\\API\\CsvReader\\Data\\Data.csproj": {
-              "projectPath": "D:\\VTU software engineering\\C#\\API\\CsvReader\\Data\\Data.csproj"
+            "D:\\VTU software engineering\\C#\\API\\CsvUniProject\\APiCsvRader\\Data\\Data.csproj": {
+              "projectPath": "D:\\VTU software engineering\\C#\\API\\CsvUniProject\\APiCsvRader\\Data\\Data.csproj"
             },
-            "D:\\VTU software engineering\\C#\\API\\CsvReader\\Services\\Services.csproj": {
-              "projectPath": "D:\\VTU software engineering\\C#\\API\\CsvReader\\Services\\Services.csproj"
+            "D:\\VTU software engineering\\C#\\API\\CsvUniProject\\APiCsvRader\\Services\\Services.csproj": {
+              "projectPath": "D:\\VTU software engineering\\C#\\API\\CsvUniProject\\APiCsvRader\\Services\\Services.csproj"
             }
           }
         }

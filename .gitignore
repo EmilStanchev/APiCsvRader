@@ -3,6 +3,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+CsvReader/database.db
+CsvReader/obj/*
+Data/obj/*
 # User-specific files
 *.rsuser
 *.suo

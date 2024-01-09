@@ -15,7 +15,7 @@ namespace Services.Implementations
         public IDataInserter Inserter { get; set; }
         public CsvReaderService CsvReaderService { get; set; }
         public CsvReaderController Controller { get; set; }
-        public string databasePath => "D:\\VTU software engineering\\C#\\API\\CsvReader\\CsvReader\\database.db";
+        public string databasePath => "D:\\VTU software engineering\\C#\\API\\CsvUniProject\\APiCsvRader\\CsvReader\\database.db";
         public ReaderConfiguration(IDatabaseService databaseService, IDataInserter inserter, CsvReaderService csvReaderService, CsvReaderController controller)
         {
             DatabaseService = databaseService;

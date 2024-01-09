@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\VTU software engineering\\C#\\API\\CsvReader\\Data\\Data.csproj": {}
+    "D:\\VTU software engineering\\C#\\API\\CsvUniProject\\APiCsvRader\\Data\\Data.csproj": {}
   },
   "projects": {
-    "D:\\VTU software engineering\\C#\\API\\CsvReader\\Data\\Data.csproj": {
+    "D:\\VTU software engineering\\C#\\API\\CsvUniProject\\APiCsvRader\\Data\\Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\VTU software engineering\\C#\\API\\CsvReader\\Data\\Data.csproj",
+        "projectUniqueName": "D:\\VTU software engineering\\C#\\API\\CsvUniProject\\APiCsvRader\\Data\\Data.csproj",
         "projectName": "Data",
-        "projectPath": "D:\\VTU software engineering\\C#\\API\\CsvReader\\Data\\Data.csproj",
+        "projectPath": "D:\\VTU software engineering\\C#\\API\\CsvUniProject\\APiCsvRader\\Data\\Data.csproj",
         "packagesPath": "C:\\Users\\emils\\.nuget\\packages\\",
-        "outputPath": "D:\\VTU software engineering\\C#\\API\\CsvReader\\Data\\obj\\",
+        "outputPath": "D:\\VTU software engineering\\C#\\API\\CsvUniProject\\APiCsvRader\\Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\emils\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -12,7 +12,7 @@ namespace Services.Controllers
     public class ReaderController
     {
         private readonly ReaderService _readerService;
-        private string dbPath = "D:\\VTU software engineering\\C#\\API\\CsvReader\\CsvReader\\database.db";
+        private string dbPath = "D:\\VTU software engineering\\C#\\API\\CsvUniProject\\APiCsvRader\\CsvReader\\database.db";
         public ReaderController(ReaderService readerService)
         {
             _readerService = readerService;

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "GwzOk49IZvgX39QieEHp/PUeVd1qDCprnGeKwRODQ/9aJ2CAlJvmBGS5HmocSQ0GUtal+B+pvFgDYrr0MC+FjQ==",
+  "dgSpecHash": "lcm+YjsGt9AYyn8LWnzqskeUVOb4d7QnmraYTF14odl7OCEZE6MdleA2TkQa17+7/2FB4DrpUy+E/wg12LbS1A==",
   "success": true,
-  "projectFilePath": "D:\\VTU software engineering\\C#\\API\\CsvReader\\Data\\Data.csproj",
+  "projectFilePath": "D:\\VTU software engineering\\C#\\API\\CsvUniProject\\APiCsvRader\\Data\\Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\emils\\.nuget\\packages\\csvhelper\\30.0.1\\csvhelper.30.0.1.nupkg.sha512",
     "C:\\Users\\emils\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
