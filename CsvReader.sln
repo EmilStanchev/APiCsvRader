@@ -3,11 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsvReader", "CsvReader\CsvReader.csproj", "{2AF22E53-D751-45F9-A166-D008AF855F2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CsvReader", "CsvReader\CsvReader.csproj", "{2AF22E53-D751-45F9-A166-D008AF855F2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{79D58D05-FF94-450D-B28D-A8077FA502C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{79D58D05-FF94-450D-B28D-A8077FA502C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{4DF471D6-C97E-450D-B4D6-408C2564BED9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{4DF471D6-C97E-450D-B4D6-408C2564BED9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsvReader.API", "CsvReader.API\CsvReader.API.csproj", "{FEE8D940-63A9-4935-95A8-5A8A30E46DCE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiServices", "ApiServices\ApiServices.csproj", "{D1FC4149-0A05-4A5F-BB08-0943DC8935DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{4DF471D6-C97E-450D-B4D6-408C2564BED9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4DF471D6-C97E-450D-B4D6-408C2564BED9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4DF471D6-C97E-450D-B4D6-408C2564BED9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEE8D940-63A9-4935-95A8-5A8A30E46DCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEE8D940-63A9-4935-95A8-5A8A30E46DCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEE8D940-63A9-4935-95A8-5A8A30E46DCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEE8D940-63A9-4935-95A8-5A8A30E46DCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1FC4149-0A05-4A5F-BB08-0943DC8935DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1FC4149-0A05-4A5F-BB08-0943DC8935DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1FC4149-0A05-4A5F-BB08-0943DC8935DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1FC4149-0A05-4A5F-BB08-0943DC8935DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

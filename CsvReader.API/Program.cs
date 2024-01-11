@@ -1,3 +1,7 @@
+using ApiServices.Implementation;
+using ApiServices.Interfaces;
+using System.Data.SqlClient;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,9 +11,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddSingleton<ITableService, TableService>();
+string relativePath = Path.Combine("D:\\VTU software engineering\\C#\\API\\CsvUniProject\\APiCsvRader\\CsvReader", "database.db");
+builder.Services.AddSingleton<IDatabaseService>(new DatabaseService($"Data Source={relativePath}"));
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
