@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{4DF471D6-C97E-450D-B4D6-408C2564BED9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsvReader.API", "CsvReader.API\CsvReader.API.csproj", "{FEE8D940-63A9-4935-95A8-5A8A30E46DCE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CsvReader.API", "CsvReader.API\CsvReader.API.csproj", "{FEE8D940-63A9-4935-95A8-5A8A30E46DCE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiServices", "ApiServices\ApiServices.csproj", "{D1FC4149-0A05-4A5F-BB08-0943DC8935DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiDatabaseServices", "ApiServices\ApiDatabaseServices.csproj", "{D1FC4149-0A05-4A5F-BB08-0943DC8935DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

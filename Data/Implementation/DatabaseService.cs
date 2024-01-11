@@ -55,6 +55,16 @@ namespace Data.Implementation
                                  CountryId INTEGER,
                                  FOREIGN KEY (CountryId) REFERENCES Countries(Id))";
                 command.ExecuteNonQuery();
+
+                command.CommandText = @"CREATE TABLE IF NOT EXISTS Accounts (
+                                 Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                 Username TEXT,
+                                 Password TEXT,
+                                 Email TEXT,
+                                 Salt TEXT,
+                                 UserType Text)";
+                command.ExecuteNonQuery();
+
             }
 
             stopwatch.Stop();

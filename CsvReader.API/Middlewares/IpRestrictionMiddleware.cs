@@ -20,7 +20,6 @@ namespace CsvReader.API.Middlewares
                 context.Response.StatusCode = (int)HttpStatusCode.Forbidden;
                 await context.Response.WriteAsync("IP Forbidden");
                 return;
-
             }
 
             await _next(context);

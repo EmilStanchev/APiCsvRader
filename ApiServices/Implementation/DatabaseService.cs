@@ -1,4 +1,6 @@
-﻿using ApiServices.Interfaces;
+﻿using ApiDatabaseServices.Interfaces;
+using ApiDatabaseServices.ViewModels;
+using ApiServices.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
@@ -12,12 +14,11 @@ namespace ApiServices.Implementation
     public class DatabaseService:IDatabaseService
     {
         private string connectionString;
-        private readonly ITableService _tableService;
-
-        public DatabaseService(string connectionString,ITableService tableService)
+        private readonly IDatabaseConfiguration _config;
+        public DatabaseService(string connectionString,IDatabaseConfiguration config)
         {
             this.connectionString = connectionString;
-            _tableService = tableService;
+            _config=config;
         }
 
         public void ExecuteNonQuery(string query)
@@ -47,13 +48,25 @@ namespace ApiServices.Implementation
         {
             try
             {
-                return _tableService.SelectByID<T>(entityId, tableName, columnName, connectionString);
+                return _config.TableService.SelectByID<T>(entityId, tableName, columnName, connectionString);
             }
             catch(Exception ex) 
             {
                 Console.WriteLine(ex.Message);
             }
             return default;
+        }
+        public void Start()
+        {
+            _config.TableCreator.CreateTable<Account>(connectionString);
+        }
+        public void InsertData<T>(T data)
+        {
+            _config.DataInserter.InsertData(data,connectionString);
+        }
+        public void UpdateData<T>(T data,string id)
+        {
+            _config.DataInserter.UpdateData(data, connectionString,id);
         }
     }
 }

@@ -13,5 +13,8 @@ namespace ApiServices.Interfaces
         public SQLiteDataReader ExecuteReader(string query);
 
         public T GetEntityById<T>(string entityId, string tableName, string columnName);
+
+        public void InsertData<T>(T data);
+        public void UpdateData<T>(T data, string id);
     }
 }
