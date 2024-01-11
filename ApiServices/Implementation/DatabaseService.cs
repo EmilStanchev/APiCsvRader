@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,11 +12,12 @@ namespace ApiServices.Implementation
     public class DatabaseService:IDatabaseService
     {
         private string connectionString;
-        private readonly ITableService tableService;
+        private readonly ITableService _tableService;
 
-        public DatabaseService(string connectionString)
+        public DatabaseService(string connectionString,ITableService tableService)
         {
             this.connectionString = connectionString;
+            _tableService = tableService;
         }
 
         public void ExecuteNonQuery(string query)
@@ -41,9 +43,17 @@ namespace ApiServices.Implementation
             return command.ExecuteReader();
         }
 
-        public T GetEntityById<T>(int entityId, string tableName, string columnName) 
+        public T GetEntityById<T>(string entityId, string tableName, string columnName) 
         {
-          return tableService.GetEntityById<T>(entityId, tableName,columnName,connectionString);
+            try
+            {
+                return _tableService.SelectByID<T>(entityId, tableName, columnName, connectionString);
+            }
+            catch(Exception ex) 
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return default;
         }
     }
 }

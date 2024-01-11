@@ -1,8 +1,10 @@
 ﻿using ApiServices.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SQLite;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,58 +13,65 @@ namespace ApiServices.Implementation
 {
     public class TableService : ITableService
     {
-        public T GetEntityById<T>(int entityId, string tableName, string columnName, string connectionString)
-            {
-            return GetEntityById<T>(entityId.ToString(), tableName, columnName, connectionString);
-        }
-
-        public T GetEntityById<T>(string entityId, string tableName, string columnName, string connectionString)
+        public T SelectByID<T>(string id,string table,string columnName, string connectionString)
         {
-            T entity = default;
-
-            string sql = $"SELECT * FROM {tableName} WHERE  {columnName}  = @Id";
+            string query = $"SELECT * FROM {table} WHERE {columnName} = @Id";
+            T item = default(T);
 
             using (SQLiteConnection connection = new SQLiteConnection(connectionString))
             {
                 connection.Open();
-
-                using (SQLiteCommand command = new SQLiteCommand(sql, connection))
+                using (SQLiteCommand command = new SQLiteCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@Id", entityId);
+                    command.Parameters.AddWithValue("@Id", id);
 
                     using (SQLiteDataReader reader = command.ExecuteReader())
                     {
                         if (reader.Read())
                         {
-                            entity = MapDataReaderToEntity<T>(reader);
+                            item = CreateInstance<T>(reader);
+
+                            foreach (var property in typeof(T).GetProperties())
+                            {
+                                SetValueIfNotNull(item, property, reader[property.Name]);
+                            }
                         }
                     }
                 }
             }
 
-            return entity;
+            return item;
         }
 
-        private T MapDataReaderToEntity<T>(SQLiteDataReader reader)
+        private T CreateInstance<T>(IDataReader reader)
         {
-            T entity = Activator.CreateInstance<T>();
+            var constructor = typeof(T).GetConstructor(Type.EmptyTypes);
 
-            for (int i = 0; i < reader.FieldCount; i++)
+            if (constructor == null)
             {
-                string columnName = reader.GetName(i);
-                object value = reader.GetValue(i);
-
-                PropertyInfo property = typeof(T).GetProperty(columnName, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
-
-                if (property != null)
-                {
-                    Type targetType = Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
-                    object convertedValue = Convert.ChangeType(value, targetType);
-                    property.SetValue(entity, convertedValue);
-                }
+                throw new InvalidOperationException($"No parameterless constructor defined for type {typeof(T)}.");
             }
 
-            return entity;
+            var parameters = GetParametersFromReader<T>(reader, constructor.GetParameters());
+            return (T)Activator.CreateInstance(typeof(T), parameters);
+        }
+
+        private object[] GetParametersFromReader<T>(IDataReader reader, ParameterInfo[] parameters)
+        {
+            return parameters.Select(parameter =>
+            {
+                var columnName = parameter.Name;
+                var value = reader[columnName];
+                return Convert.ChangeType(value, parameter.ParameterType);
+            }).ToArray();
+        }
+
+        private void SetValueIfNotNull<T>(T item, PropertyInfo property, object value)
+        {
+            if (property.GetSetMethod() != null && value != DBNull.Value)
+            {
+                property.SetValue(item, Convert.ChangeType(value, property.PropertyType));
+            }
         }
     }
 }

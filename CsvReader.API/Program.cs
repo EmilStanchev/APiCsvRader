@@ -13,7 +13,12 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<ITableService, TableService>();
 string relativePath = Path.Combine("D:\\VTU software engineering\\C#\\API\\CsvUniProject\\APiCsvRader\\CsvReader", "database.db");
-builder.Services.AddSingleton<IDatabaseService>(new DatabaseService($"Data Source={relativePath}"));
+builder.Services.AddSingleton<IDatabaseService>(provider =>
+{
+    // Resolve ITableService from the service provider
+    ITableService tableService = provider.GetRequiredService<ITableService>();
+    return new DatabaseService($"Data Source={relativePath}", tableService);
+});
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {

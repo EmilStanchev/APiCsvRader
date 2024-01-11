@@ -12,6 +12,6 @@ namespace ApiServices.Interfaces
         public void ExecuteNonQuery(string query);
         public SQLiteDataReader ExecuteReader(string query);
 
-        public T GetEntityById<T>(int entityId, string tableName, string columnName);
+        public T GetEntityById<T>(string entityId, string tableName, string columnName);
     }
 }

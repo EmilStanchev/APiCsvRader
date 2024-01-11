@@ -17,9 +17,16 @@ namespace CsvReader.API.Controllers
         [HttpPost]
 
         [Route("countryById")]
-        public IActionResult GetCoutnryById(int id)
+        public IActionResult GetCoutnryById(string id)
         {
             var result = _databaseService.GetEntityById<Country>(id, "Countries", "Id");
+            return Ok(result);
+        }
+        [HttpPost]
+        [Route("organizationById")]
+        public IActionResult GetOrganizationById(string id)
+        {
+            var result = _databaseService.GetEntityById<Organization>(id, "Organizations", "Organization_Id");
             return Ok(result);
         }
     }

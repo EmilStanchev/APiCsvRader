@@ -8,6 +8,6 @@ namespace ApiServices.Interfaces
 {
     public interface ITableService
     {
-        public T GetEntityById<T>(int entityId, string tableName, string columnName, string connectionString);
+        public T SelectByID<T>(string table, string id, string columnName, string connectionString);
     }
 }
