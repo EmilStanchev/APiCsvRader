@@ -19,5 +19,6 @@ namespace ApiServices.Interfaces
         public void UpdateData<T>(T data, string id);
         public List<T> SelectData<T>(string table);
         public Task<IEnumerable<Organization>> SearchOrganizationByCountry(string countryId);
+        public Organization GetOrganizationWithMaxEmployees();
     }
 }

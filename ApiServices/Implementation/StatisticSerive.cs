@@ -59,7 +59,43 @@ namespace ApiDatabaseServices.Implementation
                 var res = connection.QueryAsync<Organization>(query, new { CountryId = countryId });
                 return res.Result;
             }
+        }
+        public Organization GetOrganizationWithMaxEmployees(string connectionString)
+        {
+            Organization organization = null;
 
+            string query = @"
+            SELECT * FROM Organizations
+            ORDER BY NumberOfEmployees DESC
+            LIMIT 1;
+        ";
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+                using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                {
+                    using (SQLiteDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            organization = new Organization
+                            {
+                                Index = reader.GetInt32(reader.GetOrdinal("Index")),
+                                Organization_Id = reader.GetString(reader.GetOrdinal("Organization_Id")),
+                                Name = reader.GetString(reader.GetOrdinal("Name")),
+                                Website = reader.GetString(reader.GetOrdinal("Website")),
+                                Description = reader.GetString(reader.GetOrdinal("Description")),
+                                Founded = reader.GetInt32(reader.GetOrdinal("Founded")),
+                                Industry = reader.GetString(reader.GetOrdinal("Industry")),
+                                NumberOfEmployees = reader.GetInt32(reader.GetOrdinal("NumberOfEmployees")),
+                                CountryId = reader.GetInt32(reader.GetOrdinal("CountryId"))
+                            };
+                        }
+                    }
+                }
+            }
+
+            return organization;
         }
 
 

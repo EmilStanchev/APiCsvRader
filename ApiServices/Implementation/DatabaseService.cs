@@ -77,6 +77,10 @@ namespace ApiServices.Implementation
         {
             return await _config.StatisticService.SearchOrganizationByCountry(countryId, connectionString);
         }
+        public Organization GetOrganizationWithMaxEmployees()
+        {
+            return _config.StatisticService.GetOrganizationWithMaxEmployees(connectionString);
+        }
 
     }
 }

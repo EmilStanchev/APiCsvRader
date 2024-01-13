@@ -10,5 +10,7 @@ namespace ApiDatabaseServices.Interfaces
     public interface IStatisticService
     {
         public Task<IEnumerable<Organization>> SearchOrganizationByCountry(string countryId, string connectionString);
+        public Organization GetOrganizationWithMaxEmployees(string connectionString);
+
     }
 }

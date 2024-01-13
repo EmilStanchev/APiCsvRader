@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CsvReaderAPI.Services.Implementation
 {
-    public class OrganizationSerive:IOrganizationService
+    public class OrganizationSerive : IOrganizationService
     {
         private readonly IDatabaseService _dbService;
         public OrganizationSerive(IDatabaseService dbService)
@@ -23,6 +23,10 @@ namespace CsvReaderAPI.Services.Implementation
         public async Task<IEnumerable<Organization>> SearchOrganizationByCountry(string countryId)
         {
             return await _dbService.SearchOrganizationByCountry(countryId);
+        }
+        public Organization GetOrganizationWithMaxEmployees()
+        {
+            return _dbService.GetOrganizationWithMaxEmployees();
         }
 
     }

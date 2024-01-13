@@ -29,7 +29,7 @@ namespace CsvReader.API.Controllers
         [Route("organizationByCountryId")]
         public async Task<IActionResult> GetOrganizationByCountryId(string countryId, int page = 1)
         {
-            int pageSize = 5;
+            int pageSize = 100;
             string cacheKey = $"OrganizationData_{countryId}_Page{page}_Size{pageSize}";
 
             if (_memoryCache.TryGetValue(cacheKey, out IEnumerable<Organization> cachedResult))
@@ -49,6 +49,13 @@ namespace CsvReader.API.Controllers
             Console.WriteLine($"Execution Time: {stopwatch.ElapsedMilliseconds} milliseconds for creating db");
 
             return Content(serializedResult, "application/json");
+        }
+        [HttpGet]
+        [Route("organizationByNumberOfEmployees")]
+        public IActionResult GetOrganizationByNumberOfEmployees()
+        {
+            var result = _organizationService.GetOrganizationWithMaxEmployees();
+            return Ok(result);
         }
 
     }
