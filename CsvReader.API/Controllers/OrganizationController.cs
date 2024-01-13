@@ -27,20 +27,27 @@ namespace CsvReader.API.Controllers
         }
         [HttpPost]
         [Route("organizationByCountryId")]
-        public async Task<IActionResult> GetOrganizationByCountryId(string countryId)
+        public async Task<IActionResult> GetOrganizationByCountryId(string countryId, int page = 1)
         {
-            string cacheKey = $"OrganizationData_{countryId}";
+            int pageSize = 5;
+            string cacheKey = $"OrganizationData_{countryId}_Page{page}_Size{pageSize}";
 
             if (_memoryCache.TryGetValue(cacheKey, out IEnumerable<Organization> cachedResult))
             {
                 return Ok(cachedResult);
             }
+
             Stopwatch stopwatch = Stopwatch.StartNew();
-            var result = await _organizationService.SearchOrganizationByCountry(countryId);
-            _memoryCache.Set(cacheKey, result, TimeSpan.FromMinutes(10));
-            string serializedResult = JsonConvert.SerializeObject(result);
+            var allResults = await _organizationService.SearchOrganizationByCountry(countryId);
+            var paginatedResults = allResults.Skip((page - 1) * pageSize).Take(pageSize);
+
+            _memoryCache.Set(cacheKey, paginatedResults, TimeSpan.FromMinutes(10));
+
+            string serializedResult = JsonConvert.SerializeObject(paginatedResults);
+
             stopwatch.Stop();
             Console.WriteLine($"Execution Time: {stopwatch.ElapsedMilliseconds} milliseconds for creating db");
+
             return Content(serializedResult, "application/json");
         }
 
