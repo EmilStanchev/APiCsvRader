@@ -16,5 +16,6 @@ namespace ApiServices.Interfaces
 
         public void InsertData<T>(T data);
         public void UpdateData<T>(T data, string id);
+        public List<T> SelectData<T>(string table);
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Data.SQLite;
 using System.Linq;
 using System.Net.NetworkInformation;
@@ -73,5 +74,49 @@ namespace ApiServices.Implementation
                 property.SetValue(item, Convert.ChangeType(value, property.PropertyType));
             }
         }
+        public List<T> SelectData<T>(string table, string connectionString)
+        {
+            List<T> results = new List<T>();
+            string query = $"SELECT * FROM {table}";
+
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+                using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                {
+                    using (SQLiteDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            T item = Activator.CreateInstance<T>();
+
+                            for (int i = 0; i < reader.FieldCount; i++)
+                            {
+                                var propertyName = reader.GetName(i);
+                                var property = typeof(T).GetProperty(propertyName);
+                                if (property != null && !reader.IsDBNull(i))
+                                {
+                                    var value = reader.GetValue(i);
+                                    if (property.PropertyType == typeof(Guid))
+                                    {
+                                        property.SetValue(item, value.ToString());
+                                    }
+                                    else
+                                    {
+                                        var convertedValue = Convert.ChangeType(value, property.PropertyType);
+                                        property.SetValue(item, convertedValue);
+                                    }
+                                }
+                            }
+
+                            results.Add(item);
+                        }
+                    }
+                }
+            }
+
+            return results;
+        }
     }
 }
+

@@ -68,5 +68,9 @@ namespace ApiServices.Implementation
         {
             _config.DataInserter.UpdateData(data, connectionString,id);
         }
+        public List<T> SelectData<T>(string table)
+        {
+            return _config.TableService.SelectData<T>(table, connectionString);
+        }
     }
 }
