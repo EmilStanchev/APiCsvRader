@@ -23,16 +23,16 @@ namespace CsvReaderAPI.Services.Implementation
             _passwordHasher = passwordHasher;
             _authorizationService = service;
         }
-        public int Register(string username, string password, string email)
+        public int Register(RegisterViewModel model)
         {
             var accounts = _databaseService.SelectData<Account>("Accounts");
-            if (accounts.Any(acc => acc.Username == username))
+            if (accounts.Any(acc => acc.Username == model.Username))
             {
                 return (int)HttpStatusCode.BadRequest;
             }
             var salt = _passwordHasher.GenerateSalt();
-            string hashPass = _passwordHasher.HashPassword(password, salt);
-            var newAccount = new Account(username, hashPass, email, Convert.ToBase64String(salt));
+            string hashPass = _passwordHasher.HashPassword(model.Password, salt);
+            var newAccount = new Account(model.Username, hashPass, model.Email, Convert.ToBase64String(salt));
             _databaseService.InsertData(newAccount);
             UserViewModel user = new UserViewModel(newAccount.Username, newAccount.Email,newAccount.UserType);
             return (int)HttpStatusCode.Created;

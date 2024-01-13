@@ -27,9 +27,13 @@ namespace CsvReader.API.Controllers
             return _accountService.GetAllAccount();
         }
         [HttpPost("register")]
-        public IActionResult Register(string username, string password, string email)
+        public IActionResult Register([FromBody]RegisterViewModel model)
         {
-            return StatusCode(_authenticationService.Register(username, password, email));
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Invalid data properties");
+            }
+            return StatusCode(_authenticationService.Register(model));
         }
         [HttpPost("login")]
         public IActionResult Login(string email, string password)

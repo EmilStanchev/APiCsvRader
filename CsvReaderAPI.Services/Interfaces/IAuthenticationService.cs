@@ -9,7 +9,7 @@ namespace CsvReaderAPI.Services.Interfaces
 {
     public interface IAuthenticationService
     {
-        public int Register(string username, string password, string email);
+        public int Register(RegisterViewModel model);
         public UserViewModel Login(string email, string password);
         public int CheckToken(string token);
     }
