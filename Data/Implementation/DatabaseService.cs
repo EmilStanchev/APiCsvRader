@@ -53,7 +53,9 @@ namespace Data.Implementation
                                  Industry TEXT,
                                  NumberOfEmployees INTEGER,
                                  CountryId INTEGER,
-                                 FOREIGN KEY (CountryId) REFERENCES Countries(Id))";
+                                 FOREIGN KEY (CountryId) REFERENCES Countries(Id));
+        CREATE INDEX IF NOT EXISTS idx_country_id ON Organizations (CountryId);
+";
                 command.ExecuteNonQuery();
 
                 command.CommandText = @"CREATE TABLE IF NOT EXISTS Accounts (

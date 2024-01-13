@@ -21,10 +21,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddMemoryCache();
+
+//db services 
 
 builder.Services.AddSingleton<ITableService, TableService>();
 builder.Services.AddSingleton<ITableCreator, TableCreator>();
 builder.Services.AddSingleton<IDataInserter, DataInserter>();
+builder.Services.AddSingleton<IStatisticService, StatisticSerive>();
 builder.Services.AddSingleton<IDatabaseConfiguration, DatabaseConfiguration>();
 string relativePath = Path.Combine("D:\\VTU software engineering\\C#\\API\\CsvUniProject\\APiCsvRader\\CsvReader", "database.db");
 builder.Services.AddSingleton<IDatabaseService>(provider =>
@@ -39,6 +43,7 @@ builder.Services.AddSingleton<IPasswordHasher, PasswordHasher>();
 builder.Services.AddSingleton<IAuthorizationService, AuthorizationService>();
 builder.Services.AddSingleton<IAuthenticationService, AuthenticationService>();
 builder.Services.AddSingleton<IAccountService, AccountService>();
+builder.Services.AddSingleton<IOrganizationService, OrganizationSerive>();
 
 builder.Services.AddAuthentication().AddJwtBearer(
     options =>

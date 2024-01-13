@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ApiServices.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
@@ -17,5 +18,6 @@ namespace ApiServices.Interfaces
         public void InsertData<T>(T data);
         public void UpdateData<T>(T data, string id);
         public List<T> SelectData<T>(string table);
+        public Task<IEnumerable<Organization>> SearchOrganizationByCountry(string countryId);
     }
 }

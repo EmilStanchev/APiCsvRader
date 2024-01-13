@@ -1,6 +1,7 @@
 ﻿using ApiDatabaseServices.Interfaces;
 using ApiDatabaseServices.ViewModels;
 using ApiServices.Interfaces;
+using ApiServices.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
@@ -72,5 +73,10 @@ namespace ApiServices.Implementation
         {
             return _config.TableService.SelectData<T>(table, connectionString);
         }
+        public async Task<IEnumerable<Organization>> SearchOrganizationByCountry(string countryId)
+        {
+            return await _config.StatisticService.SearchOrganizationByCountry(countryId, connectionString);
+        }
+
     }
 }

@@ -15,7 +15,7 @@ namespace CsvReader.API.Controllers
         {
             _databaseService = databaseService;
         }
-        [HttpPost]
+        /*[HttpPost]
 
         [Route("countryById")]
         public IActionResult GetCoutnryById(string id)
@@ -44,5 +44,6 @@ namespace CsvReader.API.Controllers
             _databaseService.UpdateData<Account>(model,id);
             return Ok();
         }
+      */
     }
 }
