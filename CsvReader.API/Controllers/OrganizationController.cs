@@ -60,6 +60,8 @@ namespace CsvReader.API.Controllers
         }
         [Authorize]
         [HttpPost]
+        [Route("getPdfForOrganizaiton")]
+
         public IActionResult GeneratePdf(string id)
         {
             try
