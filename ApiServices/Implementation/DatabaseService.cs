@@ -12,14 +12,14 @@ using System.Threading.Tasks;
 
 namespace ApiServices.Implementation
 {
-    public class DatabaseService:IDatabaseService
+    public class DatabaseService : IDatabaseService
     {
         private string connectionString;
         private readonly IDatabaseConfiguration _config;
-        public DatabaseService(string connectionString,IDatabaseConfiguration config)
+        public DatabaseService(string connectionString, IDatabaseConfiguration config)
         {
             this.connectionString = connectionString;
-            _config=config;
+            _config = config;
         }
 
         public void ExecuteNonQuery(string query)
@@ -45,13 +45,13 @@ namespace ApiServices.Implementation
             return command.ExecuteReader();
         }
 
-        public T GetEntityById<T>(string entityId, string tableName, string columnName) 
+        public T GetEntityById<T>(string entityId, string tableName, string columnName)
         {
             try
             {
                 return _config.TableService.SelectByID<T>(entityId, tableName, columnName, connectionString);
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -63,11 +63,11 @@ namespace ApiServices.Implementation
         }
         public void InsertData<T>(T data)
         {
-            _config.DataInserter.InsertData(data,connectionString);
+            _config.DataInserter.InsertData(data, connectionString);
         }
-        public void UpdateData<T>(T data,string id)
+        public void UpdateData<T>(T data, string id)
         {
-            _config.DataInserter.UpdateData(data, connectionString,id);
+            _config.DataInserter.UpdateData(data, connectionString, id);
         }
         public List<T> SelectData<T>(string table)
         {
@@ -81,6 +81,11 @@ namespace ApiServices.Implementation
         {
             return _config.StatisticService.GetOrganizationWithMaxEmployees(connectionString);
         }
+        public void SoftDeleteCountry(int countryId)
+        {
+            _config.TableService.SoftDeleteCountry(countryId, connectionString);
+        }
+
 
     }
 }

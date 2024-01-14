@@ -40,7 +40,8 @@ namespace Data.Implementation
             {
                 command.CommandText = @"CREATE TABLE IF NOT EXISTS Countries (
                                  Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                 CountryName TEXT)";
+                                 CountryName TEXT,
+                                IsDeleted BOOLEAN DEFAULT 0)";
                 command.ExecuteNonQuery();
 
                 command.CommandText = @"CREATE TABLE IF NOT EXISTS Organizations (
@@ -52,6 +53,7 @@ namespace Data.Implementation
                                  Founded INTEGER,
                                  Industry TEXT,
                                  NumberOfEmployees INTEGER,
+                                 IsDeleted BOOLEAN DEFAULT 0,
                                  CountryId INTEGER,
                                  FOREIGN KEY (CountryId) REFERENCES Countries(Id));
         CREATE INDEX IF NOT EXISTS idx_country_id ON Organizations (CountryId);

@@ -44,6 +44,7 @@ builder.Services.AddSingleton<IAuthorizationService, AuthorizationService>();
 builder.Services.AddSingleton<IAuthenticationService, AuthenticationService>();
 builder.Services.AddSingleton<IAccountService, AccountService>();
 builder.Services.AddSingleton<IOrganizationService, OrganizationSerive>();
+builder.Services.AddSingleton<ICountryService, CountryService>();
 
 builder.Services.AddAuthentication().AddJwtBearer(
     options =>

@@ -2,6 +2,7 @@
 using ApiServices.Implementation;
 using ApiServices.Interfaces;
 using ApiServices.ViewModels;
+using CsvReaderAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CsvReader.API.Controllers
@@ -10,10 +11,10 @@ namespace CsvReader.API.Controllers
     [Route("[controller]")]
     public class CountryController : Controller
     {
-        private readonly IDatabaseService _databaseService;
-        public CountryController(IDatabaseService databaseService)
+        private readonly ICountryService _countryService;
+        public CountryController(ICountryService countryService)
         {
-            _databaseService = databaseService;
+            _countryService = countryService;
         }
         /*[HttpPost]
 
@@ -45,5 +46,12 @@ namespace CsvReader.API.Controllers
             return Ok();
         }
       */
+        [HttpPost]
+        [Route("deleteCountry")]
+        public IActionResult GetCoutnryById(int id)
+        {
+            var result = _countryService.DeleteCountry(id);
+            return StatusCode(result);
+        }
     }
 }

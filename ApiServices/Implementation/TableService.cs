@@ -14,7 +14,7 @@ namespace ApiServices.Implementation
 {
     public class TableService : ITableService
     {
-        public T SelectByID<T>(string id,string table,string columnName, string connectionString)
+        public T SelectByID<T>(string id, string table, string columnName, string connectionString)
         {
             string query = $"SELECT * FROM {table} WHERE {columnName} = @Id";
             T item = default(T);
@@ -115,6 +115,49 @@ namespace ApiServices.Implementation
                 }
             }
             return results;
+        }
+        public void SoftDeleteCountry(int countryId, string connectionString)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+
+                using (SQLiteTransaction transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        string countryQuery = @"
+                        UPDATE Countries
+                        SET IsDeleted = 1
+                        WHERE Id = @CountryId;
+                    ";
+
+                        using (SQLiteCommand countryCommand = new SQLiteCommand(countryQuery, connection, transaction))
+                        {
+                            countryCommand.Parameters.AddWithValue("@CountryId", countryId);
+                            countryCommand.ExecuteNonQuery();
+                        }
+                        string organizationsQuery = @"
+                        UPDATE Organizations
+                        SET IsDeleted = 1
+                        WHERE CountryId = @CountryId;
+                    ";
+
+                        using (SQLiteCommand organizationsCommand = new SQLiteCommand(organizationsQuery, connection, transaction))
+                        {
+                            organizationsCommand.Parameters.AddWithValue("@CountryId", countryId);
+                            organizationsCommand.ExecuteNonQuery();
+                        }
+
+                        transaction.Commit();
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
+                        throw;
+                    }
+                }
+            }
         }
     }
 }
