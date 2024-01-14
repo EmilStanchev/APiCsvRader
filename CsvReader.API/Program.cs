@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
+using Quartz;
+using CsvReader.API.Jobs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,7 +48,18 @@ builder.Services.AddSingleton<IAccountService, AccountService>();
 builder.Services.AddSingleton<IOrganizationService, OrganizationSerive>();
 builder.Services.AddSingleton<ICountryService, CountryService>();
 
-builder.Services.AddAuthentication().AddJwtBearer(
+builder.Services.AddQuartz(q =>
+{
+    var jobKey = new JobKey("InfoFileJob");
+    q.AddJob<InfoFileJob>(opts => opts.WithIdentity(jobKey));
+
+    q.AddTrigger(opts => opts
+        .ForJob(jobKey)
+        .WithIdentity("InfoFileJob-trigger")
+        .WithCronSchedule("0/10 * * ? * *"));
+
+});
+builder.Services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true); builder.Services.AddAuthentication().AddJwtBearer(
     options =>
     {
         options.TokenValidationParameters = new TokenValidationParameters
