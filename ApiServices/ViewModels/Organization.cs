@@ -17,5 +17,18 @@ namespace ApiServices.ViewModels
         public string Industry { get; set; }
         public int NumberOfEmployees { get; set; }
         public int CountryId { get; set; }
+        public override string ToString()
+        {
+            return $"Organization Information:\n" +
+                   $"Index: {Index}\n" +
+                   $"Organization ID: {Organization_Id}\n" +
+                   $"Name: {Name}\n" +
+                   $"Website: {Website}\n" +
+                   $"Description: {Description}\n" +
+                   $"Founded: {Founded}\n" +
+                   $"Industry: {Industry}\n" +
+                   $"Number of Employees: {NumberOfEmployees}\n" +
+                   $"Country ID: {CountryId}";
+        }
     }
 }

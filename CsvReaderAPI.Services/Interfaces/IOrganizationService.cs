@@ -11,7 +11,8 @@ namespace CsvReaderAPI.Services.Interfaces
     {
         public Organization SelectOrganizationById(string id);
         public Task<IEnumerable<Organization>> SearchOrganizationByCountry(string countryId);
-        public Organization GetOrganizationWithMaxEmployees(); 
+        public Organization GetOrganizationWithMaxEmployees();
+        public byte[] ReturnPdfFileForORganization(string id);
 
 
     }

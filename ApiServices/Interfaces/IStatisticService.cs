@@ -11,6 +11,7 @@ namespace ApiDatabaseServices.Interfaces
     {
         public Task<IEnumerable<Organization>> SearchOrganizationByCountry(string countryId, string connectionString);
         public Organization GetOrganizationWithMaxEmployees(string connectionString);
-
+        public int CountCountries(string connectionString);
+        public int CountOrganizations(string connectionString);
     }
 }

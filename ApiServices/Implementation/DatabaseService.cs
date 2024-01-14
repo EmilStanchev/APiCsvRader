@@ -85,6 +85,14 @@ namespace ApiServices.Implementation
         {
             _config.TableService.SoftDeleteCountry(countryId, connectionString);
         }
+        public int CountCountries()
+        {
+            return _config.StatisticService.CountCountries(connectionString);
+        }
+        public int CountOrganizations()
+        {
+            return _config.StatisticService.CountOrganizations(connectionString);
+        }
 
 
     }

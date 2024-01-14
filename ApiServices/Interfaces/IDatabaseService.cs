@@ -21,6 +21,8 @@ namespace ApiServices.Interfaces
         public Task<IEnumerable<Organization>> SearchOrganizationByCountry(string countryId);
         public Organization GetOrganizationWithMaxEmployees();
         public void SoftDeleteCountry(int countryId);
+        public int CountCountries();
+        public int CountOrganizations();
 
     }
 }

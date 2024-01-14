@@ -1,18 +1,26 @@
-﻿using Quartz;
+﻿using ApiDatabaseServices.Interfaces;
+using ApiServices.Interfaces;
+using Quartz;
 
 namespace CsvReader.API.Jobs
 {
     public class InfoFileJob: IJob
     {
         private string directoryPath = "D:\\VTU software engineering\\C#\\CsvFiles\\readed";
-        private string saveFilePath = "D:\\VTU software engineering\\C#\\API\\CsvUniProject\\APiCsvRader\\CsvReader.API\\Logs\\info.txt";
+        private string saveFilePath = $"D:\\VTU software engineering\\C#\\API\\CsvUniProject\\APiCsvRader\\CsvReader.API\\Logs\\";
+        private readonly IDatabaseService _databaseService;
+        private readonly IApiPrinter _apiPrinter;
+        public InfoFileJob(IDatabaseService databaseService, IApiPrinter apiPrinter)
+        {
+            _databaseService = databaseService;
+            _apiPrinter = apiPrinter;
+        }
 
         public Task Execute(IJobExecutionContext ctx)
         {
             try
             {
                 SaveFileWithInfo();
-                Console.WriteLine($"{saveFilePath} is saved in {directoryPath}");
                 return Task.CompletedTask;
             }
             catch(Exception ex)
@@ -25,7 +33,7 @@ namespace CsvReader.API.Jobs
         {
             if (!Directory.Exists(directoryPath))
             {
-                Console.WriteLine($"Directory '{directoryPath}' not found.");
+                _apiPrinter.Print($"Directory '{directoryPath}' not found.");
                 return 0;
             }
             string[] files = Directory.GetFiles(directoryPath);
@@ -48,14 +56,26 @@ namespace CsvReader.API.Jobs
             try
             {
                 int fileCount = CountFilesCreatedToday();
-                using (StreamWriter writer = new StreamWriter(saveFilePath))
+                string fileName = $"{DateTime.Today.ToString("yyyy-MM-dd")}_Info.json";
+                string filePath = Path.Combine(saveFilePath, fileName);
+                var organization = _databaseService.GetOrganizationWithMaxEmployees();
+                int countriesCount = _databaseService.CountCountries();
+                int organizationsCount = _databaseService.CountOrganizations();
+                using (StreamWriter writer = new StreamWriter(filePath))
                 {
-                    writer.WriteLine($"File Count: {fileCount} for : {DateTime.Today}");
+                    writer.WriteLine($"File Count: {fileCount} for : {DateTime.Today.ToString("dd-MM-yyyy")}");
+                    writer.WriteLine($"The organizations with the most number of employee is:");
+                    writer.WriteLine(organization.ToString());
+                    writer.WriteLine($"There are {countriesCount} countries in the db");
+                    writer.WriteLine($"There are {organizationsCount} organizations in the db");
+
                 }
+                _apiPrinter.Print($"{filePath} is saved in {directoryPath}");
+
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error saving file count to {saveFilePath}: {ex.Message}");
+                _apiPrinter.Print($"Error saving file count to {saveFilePath}: {ex.Message}");
             }
         }
     }

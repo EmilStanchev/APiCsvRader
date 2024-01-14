@@ -13,6 +13,7 @@ using System.Data.SqlClient;
 using System.Text;
 using Quartz;
 using CsvReader.API.Jobs;
+using ApiDatabaseServices.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,7 +41,7 @@ builder.Services.AddSingleton<IDatabaseService>(provider =>
 });
 
 // services for controllers 
-
+builder.Services.AddSingleton<IApiPrinter, ApiPrinter>();
 builder.Services.AddSingleton<IPasswordHasher, PasswordHasher>();
 builder.Services.AddSingleton<IAuthorizationService, AuthorizationService>();
 builder.Services.AddSingleton<IAuthenticationService, AuthenticationService>();
@@ -56,7 +57,8 @@ builder.Services.AddQuartz(q =>
     q.AddTrigger(opts => opts
         .ForJob(jobKey)
         .WithIdentity("InfoFileJob-trigger")
-        .WithCronSchedule("0/10 * * ? * *"));
+         // this is for 10 secs and its for test.WithCronSchedule("0/10 * * ? * *"));
+         .WithCronSchedule("0 0 0 * *  ?"));
 
 });
 builder.Services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true); builder.Services.AddAuthentication().AddJwtBearer(

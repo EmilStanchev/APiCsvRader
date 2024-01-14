@@ -97,7 +97,37 @@ namespace ApiDatabaseServices.Implementation
 
             return organization;
         }
+        public int CountCountries(string connectionString)
+        {
+            int count = 0;
+            string query = "SELECT COUNT(*) FROM Countries WHERE IsDeleted = 0;";
 
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+                using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                {
+                    count = Convert.ToInt32(command.ExecuteScalar());
+                }
+            }
 
+            return count;
+        }
+        public int CountOrganizations(string connectionString)
+        {
+            int count = 0;
+            string query = "SELECT COUNT(*) FROM Organizations WHERE IsDeleted = 0;";
+
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+                using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                {
+                    count = Convert.ToInt32(command.ExecuteScalar());
+                }
+            }
+
+            return count;
+        }
     }
 }

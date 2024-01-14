@@ -57,6 +57,27 @@ namespace CsvReader.API.Controllers
             var result = _organizationService.GetOrganizationWithMaxEmployees();
             return Ok(result);
         }
+        [HttpPost]
+        public IActionResult GeneratePdf(string id)
+        {
+            try
+            {
+                string fileName = "id.pdf";
+                byte[] pdfBytes = _organizationService.ReturnPdfFileForORganization(id);
+                var contentDisposition = new Microsoft.Net.Http.Headers.ContentDispositionHeaderValue("attachment")
+                {
+                    FileName = fileName
+                };
+
+                Response.Headers.Add("Content-Disposition", contentDisposition.ToString());
+                return File(pdfBytes, "application/pdf", fileName);
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions and return an appropriate response
+                return StatusCode(500, $"Internal Server Error: {ex.Message}");
+            }
+        }
 
     }
 }
