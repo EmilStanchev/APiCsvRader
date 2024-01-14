@@ -1,5 +1,6 @@
 ﻿using ApiServices.ViewModels;
 using CsvReaderAPI.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json;
@@ -57,12 +58,13 @@ namespace CsvReader.API.Controllers
             var result = _organizationService.GetOrganizationWithMaxEmployees();
             return Ok(result);
         }
+        [Authorize]
         [HttpPost]
         public IActionResult GeneratePdf(string id)
         {
             try
             {
-                string fileName = "id.pdf";
+                string fileName = $"{id}-Info.pdf";
                 byte[] pdfBytes = _organizationService.ReturnPdfFileForORganization(id);
                 var contentDisposition = new Microsoft.Net.Http.Headers.ContentDispositionHeaderValue("attachment")
                 {
@@ -74,7 +76,6 @@ namespace CsvReader.API.Controllers
             }
             catch (Exception ex)
             {
-                // Handle exceptions and return an appropriate response
                 return StatusCode(500, $"Internal Server Error: {ex.Message}");
             }
         }

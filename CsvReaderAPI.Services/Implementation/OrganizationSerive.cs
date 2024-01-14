@@ -1,8 +1,11 @@
 ﻿using ApiServices.Interfaces;
 using ApiServices.ViewModels;
+using CsvReader.API.Helpers;
 using CsvReaderAPI.Services.Interfaces;
 using Microsoft.VisualBasic;
 using PdfSharp.Drawing;
+using PdfSharp.Drawing.Layout;
+using PdfSharp.Fonts;
 using PdfSharp.Pdf;
 using System;
 using System.Collections.Generic;
@@ -18,6 +21,7 @@ namespace CsvReaderAPI.Services.Implementation
         public OrganizationSerive(IDatabaseService dbService)
         {
             _dbService = dbService;
+            GlobalFontSettings.FontResolver = new CustomFontResolver();
         }
         public Organization SelectOrganizationById(string id)
         {
@@ -37,9 +41,25 @@ namespace CsvReaderAPI.Services.Implementation
             {
                 PdfPage page = document.AddPage();
                 XGraphics gfx = XGraphics.FromPdfPage(page);
+
                 XFont font = new XFont("Arial", 12);
-                string organization = _dbService.GetEntityById<Organization>(id, "Organizations", "Organization_Id").ToString();
-                gfx.DrawString($"Information: {organization}", font, XBrushes.Black, new XRect(10, 10, page.Width, page.Height), XStringFormats.TopLeft);
+
+                var organization = _dbService.GetEntityById<Organization>(id, "Organizations", "Organization_Id");
+
+                string formattedInformation = $"Organization Information:\n" +
+                                              $"Index: {organization.Index}\n" +
+                                              $"Organization ID: {organization.Organization_Id}\n" +
+                                              $"Name: {organization.Name}\n" +
+                                              $"Website: {organization.Website}\n" +
+                                              $"Founded: {organization.Founded}\n" +
+                                              $"Description: {organization.Description}\n" +
+                                              $"Industry: {organization.Industry}\n" +
+                                              $"Number Of Employees: {organization.NumberOfEmployees}\n" +
+                                              $"Country id: {organization.CountryId}";
+
+                XRect layoutRectangle = new XRect(10, 10, page.Width, page.Height);
+                XTextFormatter textFormatter = new XTextFormatter(gfx);
+                textFormatter.DrawString(formattedInformation, font, XBrushes.Black, layoutRectangle, XStringFormats.TopLeft);
 
                 using (MemoryStream memoryStream = new MemoryStream())
                 {
