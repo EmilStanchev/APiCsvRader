@@ -20,9 +20,9 @@ namespace CsvReader.API.Controllers
         [Authorize]
         [HttpPost]
         [Route("deleteCountry")]
-        public IActionResult GetCoutnryById(int id)
+        public IActionResult GetCoutnryById(int id,string accountId)
         {
-            var result = _countryService.DeleteCountry(id);
+            var result = _countryService.DeleteCountry(id,accountId);
             return StatusCode(result);
         }
     }

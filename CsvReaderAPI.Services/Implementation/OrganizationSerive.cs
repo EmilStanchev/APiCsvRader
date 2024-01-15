@@ -1,7 +1,10 @@
-﻿using ApiServices.Interfaces;
+﻿using ApiDatabaseServices.ViewModels;
+using ApiServices.Interfaces;
 using ApiServices.ViewModels;
 using CsvReader.API.Helpers;
 using CsvReaderAPI.Services.Interfaces;
+using CsvReaderAPI.Services.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.VisualBasic;
 using PdfSharp.Drawing;
 using PdfSharp.Drawing.Layout;
@@ -67,6 +70,50 @@ namespace CsvReaderAPI.Services.Implementation
                     return memoryStream.ToArray();
                 }
             }
+        }
+        public int CreateOrganization(OrganizationViewModel model)
+        {
+            try
+            {
+                Organization organization = new Organization()
+                {
+                    CountryId = model.CountryId,
+                    Index = model.Index,
+                    Name = model.Name,
+                    Organization_Id = model.Organization_Id,
+                    Website = model.Website,
+                    Founded = model.Founded,
+                    Description = model.Description,
+                    Industry = model.Industry,
+                    NumberOfEmployees = model.NumberOfEmployees,
+                };
+                _dbService.InsertData(organization);
+                return StatusCodes.Status201Created;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return StatusCodes.Status400BadRequest;
+            }
+        }
+        public int DeleteOrganization(string organizationId,string accountId)
+        {
+            var account = _dbService.GetEntityById<Account>(accountId, "Accounts", "Id");
+            if (account.UserType == "Admin")
+            {
+                try
+                {
+
+                    _dbService.SoftDeleteOrganization(organizationId);
+                    return StatusCodes.Status200OK;
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return StatusCodes.Status400BadRequest;
+                }
+            }
+            return StatusCodes.Status401Unauthorized;
         }
     }
 }

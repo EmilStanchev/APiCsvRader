@@ -93,6 +93,10 @@ namespace ApiServices.Implementation
         {
             return _config.StatisticService.CountOrganizations(connectionString);
         }
+        public void SoftDeleteOrganization(string organizationId)
+        {
+            _config.TableService.SoftDeleteOrganization(organizationId, connectionString);
+        }
 
 
     }

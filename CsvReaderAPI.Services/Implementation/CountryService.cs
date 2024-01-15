@@ -1,4 +1,5 @@
-﻿using ApiServices.Interfaces;
+﻿using ApiDatabaseServices.ViewModels;
+using ApiServices.Interfaces;
 using CsvReaderAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using System;
@@ -16,12 +17,18 @@ namespace CsvReaderAPI.Services.Implementation
         {
             _databaseService = database;
         }
-        public int DeleteCountry(int countryId)
+        public int DeleteCountry(int countryId,string accountId)
         {
             try
             {
-                _databaseService.SoftDeleteCountry(countryId);
-                return StatusCodes.Status200OK;
+                var account = _databaseService.GetEntityById<Account>(accountId, "Accounts","Id");
+                if (account.UserType=="Admin")
+                {
+
+                    _databaseService.SoftDeleteCountry(countryId);
+                    return StatusCodes.Status200OK;
+                }
+                return StatusCodes.Status401Unauthorized;
             }
             catch (Exception ex)
             {

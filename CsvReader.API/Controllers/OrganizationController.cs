@@ -1,5 +1,6 @@
 ﻿using ApiServices.ViewModels;
 using CsvReaderAPI.Services.Interfaces;
+using CsvReaderAPI.Services.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
@@ -81,6 +82,25 @@ namespace CsvReader.API.Controllers
                 return StatusCode(500, $"Internal Server Error: {ex.Message}");
             }
         }
-
+        [HttpPost]
+        [Authorize()]
+        [Route("createOrganization")]
+        public IActionResult CreateOrganization(OrganizationViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var res = _organizationService.CreateOrganization(model);
+            return StatusCode(res);
+        }
+        [HttpPost]
+        [Authorize()]
+        [Route("deleteOrganization")]
+        public IActionResult SoftDeleteOrganization(string organizationId,string accountId)
+        {
+            var res = _organizationService.DeleteOrganization(organizationId,accountId);
+            return StatusCode(res);
+        }
     }
 }

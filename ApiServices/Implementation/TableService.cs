@@ -77,7 +77,7 @@ namespace ApiServices.Implementation
         public List<T> SelectData<T>(string table, string connectionString)
         {
             List<T> results = new List<T>();
-            string query = $"SELECT * FROM {table}";
+            string query = $"SELECT * FROM {table} WHERE IsDeleted = 0";
 
             using (SQLiteConnection connection = new SQLiteConnection(connectionString))
             {
@@ -159,6 +159,36 @@ namespace ApiServices.Implementation
                 }
             }
         }
+        public void SoftDeleteOrganization(string organizationId, string connectionString)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+
+                using (SQLiteTransaction transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        string organizationQuery = @"
+                    UPDATE Organizations
+                    SET IsDeleted = 1
+                    WHERE Organization_Id = @OrganizationId";
+
+                        using (SQLiteCommand organizationCommand = new SQLiteCommand(organizationQuery, connection, transaction))
+                        {
+                            organizationCommand.Parameters.Add(new SQLiteParameter("@OrganizationId", organizationId));
+                            organizationCommand.ExecuteNonQuery();
+                        }
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                        transaction.Rollback();
+                    }
+                }
+            }
+    }
     }
 }
 

@@ -8,7 +8,7 @@ namespace CsvReaderAPI.Services.Interfaces
 {
     public interface ICountryService
     {
-        public int DeleteCountry(int countryId);
+        public int DeleteCountry(int countryId,string accountId);
 
     }
 }

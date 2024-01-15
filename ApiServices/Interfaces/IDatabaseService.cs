@@ -23,6 +23,7 @@ namespace ApiServices.Interfaces
         public void SoftDeleteCountry(int countryId);
         public int CountCountries();
         public int CountOrganizations();
+        public void SoftDeleteOrganization(string organizationId);
 
     }
 }

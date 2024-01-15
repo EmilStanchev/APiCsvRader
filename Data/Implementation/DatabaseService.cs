@@ -66,7 +66,8 @@ namespace Data.Implementation
                                  Password TEXT,
                                  Email TEXT,
                                  Salt TEXT,
-                                 UserType Text)";
+                                 UserType Text,
+ IsDeleted BOOLEAN DEFAULT 0)";
                 command.ExecuteNonQuery();
 
             }

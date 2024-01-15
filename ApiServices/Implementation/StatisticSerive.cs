@@ -51,7 +51,7 @@ namespace ApiDatabaseServices.Implementation
 
         public async Task<IEnumerable<Organization>> SearchOrganizationByCountry(string countryId, string connectionString)
         {
-            string query = "SELECT Name, Website,NumberOfEmployees,Industry,Founded FROM Organizations WHERE CountryId = @CountryId";
+            string query = "SELECT * FROM Organizations WHERE CountryId = @CountryId AND IsDeleted = 0";
 
             using (var connection = new SQLiteConnection(connectionString))
             {
