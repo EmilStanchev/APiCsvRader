@@ -14,6 +14,7 @@ namespace ApiDatabaseServices.Interfaces
         public ITableCreator TableCreator { get; set; }
         public IDataInserter DataInserter { get; set; }
         public IStatisticService StatisticService { get; set; }
+        public IDeleteService DeleteService { get; set; }
 
     }
 }

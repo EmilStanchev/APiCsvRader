@@ -24,6 +24,6 @@ namespace ApiServices.Interfaces
         public int CountCountries();
         public int CountOrganizations();
         public void SoftDeleteOrganization(string organizationId);
-
+        public void SoftDeleteAccount(string accountId);
     }
 }

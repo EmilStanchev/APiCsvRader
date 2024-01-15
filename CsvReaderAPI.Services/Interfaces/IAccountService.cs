@@ -10,5 +10,6 @@ namespace CsvReaderAPI.Services.Interfaces
     public interface IAccountService
     {
         public List<UserViewModel> GetAllAccount();
+        public int DeleteAccount(string deleteAccountId, string accountId);
     }
 }

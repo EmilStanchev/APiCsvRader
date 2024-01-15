@@ -30,6 +30,7 @@ builder.Services.AddMemoryCache();
 //db services 
 
 builder.Services.AddSingleton<ITableService, TableService>();
+builder.Services.AddSingleton<IDeleteService, DeleteService>();
 builder.Services.AddSingleton<ITableCreator, TableCreator>();
 builder.Services.AddSingleton<IDataInserter, DataInserter>();
 builder.Services.AddSingleton<IStatisticService, StatisticSerive>();

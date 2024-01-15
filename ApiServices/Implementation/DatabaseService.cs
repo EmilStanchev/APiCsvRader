@@ -83,7 +83,7 @@ namespace ApiServices.Implementation
         }
         public void SoftDeleteCountry(int countryId)
         {
-            _config.TableService.SoftDeleteCountry(countryId, connectionString);
+            _config.DeleteService.SoftDeleteCountry(countryId, connectionString);
         }
         public int CountCountries()
         {
@@ -95,7 +95,11 @@ namespace ApiServices.Implementation
         }
         public void SoftDeleteOrganization(string organizationId)
         {
-            _config.TableService.SoftDeleteOrganization(organizationId, connectionString);
+            _config.DeleteService.SoftDeleteOrganization(organizationId, connectionString);
+        }
+        public void SoftDeleteAccount(string accountId)
+        {
+            _config.DeleteService.SoftDeleteAccount(accountId, connectionString);
         }
 
 

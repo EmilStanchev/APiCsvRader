@@ -14,13 +14,16 @@ namespace ApiDatabaseServices.Implementation
         public ITableCreator TableCreator { get; set; }
         public IDataInserter DataInserter { get; set; }
         public IStatisticService StatisticService { get; set; }
+        public IDeleteService DeleteService { get; set; }
 
-        public DatabaseConfiguration(ITableCreator creator,ITableService service,IDataInserter dataInserter,IStatisticService statisticService) 
+
+        public DatabaseConfiguration(ITableCreator creator,ITableService service,IDataInserter dataInserter,IStatisticService statisticService,IDeleteService deleteService) 
         {
             TableCreator=creator;
             TableService=service;
             DataInserter = dataInserter;
             StatisticService=statisticService;
+            DeleteService=deleteService;
         }
     }
 }

@@ -116,7 +116,7 @@ namespace ApiServices.Implementation
             }
             return results;
         }
-        public void SoftDeleteCountry(int countryId, string connectionString)
+       /* public void SoftDeleteCountry(int countryId, string connectionString)
         {
             using (SQLiteConnection connection = new SQLiteConnection(connectionString))
             {
@@ -188,7 +188,7 @@ namespace ApiServices.Implementation
                     }
                 }
             }
-    }
+        }*/
     }
 }
 
