@@ -38,17 +38,12 @@ namespace CsvReader.API.Controllers
             {
                 return Ok(cachedResult);
             }
-
-            Stopwatch stopwatch = Stopwatch.StartNew();
             var allResults = await _organizationService.SearchOrganizationByCountry(countryId);
             var paginatedResults = allResults.Skip((page - 1) * pageSize).Take(pageSize);
 
             _memoryCache.Set(cacheKey, paginatedResults, TimeSpan.FromMinutes(10));
 
             string serializedResult = JsonConvert.SerializeObject(paginatedResults);
-
-            stopwatch.Stop();
-            Console.WriteLine($"Execution Time: {stopwatch.ElapsedMilliseconds} milliseconds for creating db");
 
             return Content(serializedResult, "application/json");
         }
@@ -94,7 +89,7 @@ namespace CsvReader.API.Controllers
             var res = _organizationService.CreateOrganization(model);
             return StatusCode(res);
         }
-        [HttpPost]
+        [HttpDelete]
         [Authorize()]
         [Route("deleteOrganization")]
         public IActionResult SoftDeleteOrganization(string organizationId,string accountId)

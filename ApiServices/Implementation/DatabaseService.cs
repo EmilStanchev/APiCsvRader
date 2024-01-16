@@ -101,7 +101,10 @@ namespace ApiServices.Implementation
         {
             _config.DeleteService.SoftDeleteAccount(accountId, connectionString);
         }
-
+        public void InsertDataWithTableName<T>(T data, string tableName)
+        {
+            _config.DataInserter.InsertDataWithTableName(data, connectionString,tableName);
+        }
 
     }
 }

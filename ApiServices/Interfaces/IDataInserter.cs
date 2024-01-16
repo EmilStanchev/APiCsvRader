@@ -10,5 +10,6 @@ namespace ApiDatabaseServices.Interfaces
     {
         public void InsertData<T>(T data, string connectionString);
         public void UpdateData<T>(T data, string connectionString, string primaryKey);
+        public void InsertDataWithTableName<T>(T data, string connectionString, string tableName);
     }
 }
