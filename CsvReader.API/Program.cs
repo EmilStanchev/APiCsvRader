@@ -59,7 +59,7 @@ builder.Services.AddQuartz(q =>
     q.AddTrigger(opts => opts
         .ForJob(jobKey)
         .WithIdentity("InfoFileJob-trigger")
-         // this is for 10 secs and its for test.WithCronSchedule("0/10 * * ? * *"));
+         // 10 seconds schedule .WithCronSchedule("0/10 * * ? * *"));
          .WithCronSchedule("0 0 0 * *  ?"));
 
 });

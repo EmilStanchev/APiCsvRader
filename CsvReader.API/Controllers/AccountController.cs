@@ -40,13 +40,21 @@ namespace CsvReader.API.Controllers
         {
             return Json(_authenticationService.Login(email, password));
         }
+        [Authorize]
         [HttpDelete("deleteAccount")]
-       
         public IActionResult DeleteAccount(string deleteAccountId,string currentAccontId)
         {
             var res = _accountService.DeleteAccount(deleteAccountId, currentAccontId);
             return StatusCode(res);
         }
+        //[Authorize]
+        [HttpPost("changeRole")]
+        public IActionResult ChangeRoleName(string changingAccount, string currentAccontId,string userType)
+        {
+            var res = _accountService.ChangeRole(changingAccount, currentAccontId,userType);
+            return StatusCode(res);
+        }
+
 
     }
 }

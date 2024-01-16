@@ -126,8 +126,38 @@ namespace ApiDatabaseServices.Implementation
                     count = Convert.ToInt32(command.ExecuteScalar());
                 }
             }
-
             return count;
+        }
+        public string GetMostUsedCountryName(string connectionString)
+        {
+            string countryName = "";
+
+            string query = @"
+                SELECT c.CountryName
+                FROM Countries c
+                JOIN (
+                    SELECT CountryId, COUNT(*) AS CountryCount
+                    FROM Organizations
+                    WHERE IsDeleted = 0
+                    GROUP BY CountryId
+                    ORDER BY CountryCount DESC
+                    LIMIT 1
+                ) o ON c.Id = o.CountryId;";
+
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+                using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                {
+                    object result = command.ExecuteScalar();
+                    if (result != null)
+                    {
+                        countryName = result.ToString();
+                    }
+                }
+            }
+
+            return countryName;
         }
     }
 }

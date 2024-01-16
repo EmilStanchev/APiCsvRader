@@ -35,8 +35,25 @@ namespace CsvReaderAPI.Services.Implementation
             {
                 try
                 {
-
                     _database.SoftDeleteAccount(deleteAccountId);
+                    return StatusCodes.Status200OK;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return StatusCodes.Status400BadRequest;
+                }
+            }
+            return StatusCodes.Status401Unauthorized;
+        }
+        public int ChangeRole(string changingAccountId,string accountId, string userType)
+        {
+            var account = _database.GetEntityById<Account>(accountId, "Accounts", "Id");
+            if (account.UserType == "Admin")
+            {
+                try
+                {
+                    _database.ChangeAccountRole(changingAccountId, userType);
                     return StatusCodes.Status200OK;
                 }
                 catch (Exception ex)

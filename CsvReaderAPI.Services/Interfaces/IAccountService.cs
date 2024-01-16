@@ -11,5 +11,6 @@ namespace CsvReaderAPI.Services.Interfaces
     {
         public List<UserViewModel> GetAllAccount();
         public int DeleteAccount(string deleteAccountId, string accountId);
+        public int ChangeRole(string changingAccountId, string accountId, string userType);
     }
 }

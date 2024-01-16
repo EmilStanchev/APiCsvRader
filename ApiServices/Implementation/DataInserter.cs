@@ -95,6 +95,25 @@ namespace ApiDatabaseServices.Implementation
                 }
             }
         }
+        public void ChangeAccountRole(string accountId,string userType,string connectionString)
+        {
+            string query = @"
+            UPDATE Accounts
+            SET Usertype = @NewUserType
+            WHERE Id = @AccountId;
+        ";
+
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+                using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@NewUserType", userType);
+                    command.Parameters.AddWithValue("@AccountId", accountId);
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
 
     }
 }

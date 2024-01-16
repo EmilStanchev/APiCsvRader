@@ -13,5 +13,6 @@ namespace ApiDatabaseServices.Interfaces
         public Organization GetOrganizationWithMaxEmployees(string connectionString);
         public int CountCountries(string connectionString);
         public int CountOrganizations(string connectionString);
+        public string GetMostUsedCountryName(string connectionString);
     }
 }

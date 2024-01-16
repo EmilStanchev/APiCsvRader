@@ -105,6 +105,13 @@ namespace ApiServices.Implementation
         {
             _config.DataInserter.InsertDataWithTableName(data, connectionString,tableName);
         }
-
+        public string GetMostUsedCountryName()
+        {
+            return _config.StatisticService.GetMostUsedCountryName(connectionString);
+        }
+        public void ChangeAccountRole(string accountId, string userType)
+        {
+            _config.DataInserter.ChangeAccountRole(accountId, userType, connectionString);
+        }
     }
 }

@@ -12,19 +12,19 @@ using System.Threading.Tasks;
 
 namespace CsvReaderAPI.Services.Implementation
 {
-    public class CountryService: ICountryService
+    public class CountryService : ICountryService
     {
         private readonly IDatabaseService _databaseService;
         public CountryService(IDatabaseService database)
         {
             _databaseService = database;
         }
-        public int DeleteCountry(int countryId,string accountId)
+        public int DeleteCountry(int countryId, string accountId)
         {
             try
             {
-                var account = _databaseService.GetEntityById<Account>(accountId, "Accounts","Id");
-                if (account.UserType=="Admin")
+                var account = _databaseService.GetEntityById<Account>(accountId, "Accounts", "Id");
+                if (account.UserType == "Admin")
                 {
 
                     _databaseService.SoftDeleteCountry(countryId);
@@ -38,9 +38,9 @@ namespace CsvReaderAPI.Services.Implementation
                 return StatusCodes.Status400BadRequest;
             }
         }
-        public Country GetCountryById(string countryId) 
+        public Country GetCountryById(string countryId)
         {
-            return _databaseService.GetEntityById<Country>(countryId,"Countries","Id");
+            return _databaseService.GetEntityById<Country>(countryId, "Countries", "Id");
         }
         public List<Country> GetAll()
         {
@@ -51,20 +51,25 @@ namespace CsvReaderAPI.Services.Implementation
             try
             {
                 var countries = GetAll();
-                if (countries.Any(c=>c.CountryName==model.CountryName))
+                if (countries.Any(c => c.CountryName == model.CountryName))
                 {
                     return StatusCodes.Status400BadRequest;
                 }
-                var dbCountry = new Country() { CountryName=model.CountryName,Id=countries.Last().Id+1};
-                _databaseService.InsertDataWithTableName(dbCountry,"Countries");
+                var dbCountry = new Country() { CountryName = model.CountryName, Id = countries.Last().Id + 1 };
+                _databaseService.InsertDataWithTableName(dbCountry, "Countries");
                 return StatusCodes.Status201Created;
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 return StatusCodes.Status400BadRequest;
             }
         }
+        public string GetMostUsedCountryName()
+        {
+            return _databaseService.GetMostUsedCountryName();
+        }
+
     }
 }

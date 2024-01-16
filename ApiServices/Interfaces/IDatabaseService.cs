@@ -26,6 +26,7 @@ namespace ApiServices.Interfaces
         public void SoftDeleteOrganization(string organizationId);
         public void SoftDeleteAccount(string accountId);
         public void InsertDataWithTableName<T>(T data, string tableName);
-
+        public string GetMostUsedCountryName();
+        public void ChangeAccountRole(string accountId, string userType);
     }
 }

@@ -14,6 +14,6 @@ namespace CsvReaderAPI.Services.Interfaces
         public Country GetCountryById(string countryId);
         public List<Country> GetAll();
         public int CreateCoutry(CountryViewModel model);
-
+        public string GetMostUsedCountryName();
     }
 }

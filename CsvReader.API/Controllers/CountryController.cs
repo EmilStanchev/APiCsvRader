@@ -68,6 +68,23 @@ namespace CsvReader.API.Controllers
             var result = _countryService.CreateCoutry(model);
             return StatusCode(result);
         }
+       // [Authorize]
+        [HttpGet]
+        [Route("getMostUsedCountry")]
+
+        public IActionResult GetMostUsedCountry()
+        {
+            try
+            {
+                var countryName = _countryService.GetMostUsedCountryName();
+                return Ok(countryName);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest();
+            }
+        }
 
     }
 }
